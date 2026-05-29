@@ -1,5 +1,6 @@
 package com.example.spendsmart.ui.screens.addexpense
 
+import androidx.annotation.StringRes
 import com.example.spendsmart.domain.model.Currency
 import com.example.spendsmart.domain.model.ExpenseCategory
 import java.time.LocalDate
@@ -13,8 +14,8 @@ data class AddExpenseUiState(
     val currency: Currency = Currency.USD,
     val currencyTouched: Boolean = false,
     val displayCurrency: Currency = Currency.USD,
-    val amountError: String? = null,
-    val categoryError: String? = null,
+    @param:StringRes val amountError: Int? = null,
+    @param:StringRes val categoryError: Int? = null,
     val isSaving: Boolean = false,
     val justSaved: Boolean = false
 ) {

@@ -36,10 +36,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.spendsmart.R
 import com.example.spendsmart.domain.model.Currency
 import com.example.spendsmart.ui.components.CategoryGrid
 import com.example.spendsmart.ui.components.GradientButton
@@ -61,7 +63,7 @@ fun AddExpenseScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
         GradientHeader(
-            title = if (state.isEdit) "Edit Expense" else "Add Expense",
+            title = stringResource(if (state.isEdit) R.string.edit_expense_title else R.string.add_expense_title),
             onBack = onBack
         )
         Column(
@@ -77,7 +79,7 @@ fun AddExpenseScreen(
                     val filtered = input.filter { ch -> ch.isDigit() || ch == '.' }
                     viewModel.onAmountChange(filtered)
                 },
-                label = { Text("Amount") },
+                label = { Text(stringResource(R.string.field_amount)) },
                 prefix = {
                     Box {
                         Row(
@@ -97,7 +99,7 @@ fun AddExpenseScreen(
                             )
                             Icon(
                                 imageVector = Icons.Filled.ArrowDropDown,
-                                contentDescription = "Pick currency",
+                                contentDescription = stringResource(R.string.cd_pick_currency),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
@@ -107,7 +109,7 @@ fun AddExpenseScreen(
                         ) {
                             Currency.entries.forEach { cur ->
                                 DropdownMenuItem(
-                                    text = { Text("${cur.flag}  ${cur.code} — ${cur.displayName}") },
+                                    text = { Text(stringResource(R.string.currency_label, cur.flag, cur.code, cur.displayName)) },
                                     onClick = {
                                         showCurrencyMenu = false
                                         viewModel.onCurrencyChange(cur)
@@ -119,9 +121,9 @@ fun AddExpenseScreen(
                 },
                 singleLine = true,
                 isError = state.amountError != null,
-                supportingText = if (state.amountError != null) {
-                    { Text(state.amountError!!) }
-                } else null,
+                supportingText = state.amountError?.let { resId ->
+                    { Text(stringResource(resId)) }
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.fillMaxWidth()
@@ -129,7 +131,7 @@ fun AddExpenseScreen(
 
             Column {
                 Text(
-                    text = "Category",
+                    text = stringResource(R.string.field_category),
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -138,9 +140,9 @@ fun AddExpenseScreen(
                     selected = state.category,
                     onSelect = viewModel::onCategoryChange
                 )
-                if (state.categoryError != null) {
+                state.categoryError?.let { resId ->
                     Text(
-                        text = state.categoryError!!,
+                        text = stringResource(resId),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.padding(top = 4.dp)
@@ -152,9 +154,9 @@ fun AddExpenseScreen(
                 value = formatDate(state.date),
                 onValueChange = {},
                 readOnly = true,
-                label = { Text("Date") },
+                label = { Text(stringResource(R.string.field_date)) },
                 trailingIcon = {
-                    Icon(Icons.Filled.CalendarMonth, contentDescription = "Pick date")
+                    Icon(Icons.Filled.CalendarMonth, contentDescription = stringResource(R.string.cd_pick_date))
                 },
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium
@@ -162,13 +164,13 @@ fun AddExpenseScreen(
             TextButton(
                 onClick = { showDatePicker = true },
                 modifier = Modifier.fillMaxWidth()
-            ) { Text("Change date") }
+            ) { Text(stringResource(R.string.field_change_date)) }
 
             OutlinedTextField(
                 value = state.notes,
                 onValueChange = viewModel::onNotesChange,
-                label = { Text("Notes (optional)") },
-                supportingText = { Text("${state.notesCharCount}/200") },
+                label = { Text(stringResource(R.string.field_notes)) },
+                supportingText = { Text(stringResource(R.string.notes_char_counter, state.notesCharCount, 200)) },
                 minLines = 3,
                 maxLines = 5,
                 modifier = Modifier.fillMaxWidth(),
@@ -178,7 +180,13 @@ fun AddExpenseScreen(
             Spacer(Modifier.height(8.dp))
 
             GradientButton(
-                text = if (state.justSaved) "Saved" else (if (state.isEdit) "Save changes" else "Save expense"),
+                text = stringResource(
+                    when {
+                        state.justSaved -> R.string.saved
+                        state.isEdit -> R.string.save_changes
+                        else -> R.string.save_expense
+                    }
+                ),
                 enabled = !state.isSaving,
                 onClick = { viewModel.onSubmit(onSaved) },
                 leadingContent = if (state.justSaved) {
@@ -210,10 +218,10 @@ fun AddExpenseScreen(
                         viewModel.onDateChange(picked)
                     }
                     showDatePicker = false
-                }) { Text("OK") }
+                }) { Text(stringResource(R.string.action_ok)) }
             },
             dismissButton = {
-                TextButton(onClick = { showDatePicker = false }) { Text("Cancel") }
+                TextButton(onClick = { showDatePicker = false }) { Text(stringResource(R.string.action_cancel)) }
             }
         ) {
             DatePicker(state = datePickerState)

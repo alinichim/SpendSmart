@@ -22,10 +22,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.spendsmart.R
 import com.example.spendsmart.domain.model.Expense
 import com.example.spendsmart.ui.components.DonutChart
 import com.example.spendsmart.ui.components.DonutSlice
@@ -49,7 +51,7 @@ fun DashboardScreen(
         ) {
             item {
                 GradientHeader(
-                    title = "Hello User 👋",
+                    title = stringResource(R.string.dashboard_greeting),
                     subtitle = state.monthLabel,
                     extraBottomPadding = true
                 )
@@ -61,7 +63,7 @@ fun DashboardScreen(
                         .offset(y = (-48).dp)
                 ) {
                     Text(
-                        text = "This month",
+                        text = stringResource(R.string.dashboard_this_month),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -75,9 +77,17 @@ fun DashboardScreen(
                         )
                         Spacer(Modifier.height(4.dp))
                         val top = state.topCategory
-                        val topLabel = if (top != null) "Top: ${top.emoji} ${top.displayName}" else "No expenses yet"
+                        val topLabel = if (top != null) {
+                            stringResource(R.string.dashboard_top_category, top.emoji, top.displayName)
+                        } else {
+                            stringResource(R.string.dashboard_no_expenses_yet)
+                        }
                         Text(
-                            text = "${state.monthTransactionCount} transactions · $topLabel",
+                            text = stringResource(
+                                R.string.dashboard_transactions_summary,
+                                state.monthTransactionCount,
+                                topLabel
+                            ),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -90,7 +100,7 @@ fun DashboardScreen(
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            text = "Add ExchangeRate-API key in Settings to see converted total",
+                            text = stringResource(R.string.dashboard_no_rates_hint),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -105,7 +115,7 @@ fun DashboardScreen(
                             .offset(y = (-32).dp)
                     ) {
                         Text(
-                            text = "Spending breakdown",
+                            text = stringResource(R.string.dashboard_spending_breakdown),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -119,7 +129,7 @@ fun DashboardScreen(
             }
             item {
                 Text(
-                    text = "Recent transactions",
+                    text = stringResource(R.string.dashboard_recent_transactions),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
@@ -147,7 +157,7 @@ fun DashboardScreen(
             if (state.expenses.isEmpty() && !state.isLoading) {
                 item {
                     Text(
-                        text = "No expenses recorded yet.",
+                        text = stringResource(R.string.dashboard_no_expenses),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
@@ -163,16 +173,16 @@ fun DashboardScreen(
     if (deleteId != null) {
         AlertDialog(
             onDismissRequest = { pendingDeleteId = null },
-            title = { Text("Delete expense?") },
-            text = { Text("This action cannot be undone.") },
+            title = { Text(stringResource(R.string.delete_expense_title)) },
+            text = { Text(stringResource(R.string.delete_expense_message)) },
             confirmButton = {
                 TextButton(onClick = {
                     viewModel.onDelete(deleteId)
                     pendingDeleteId = null
-                }) { Text("Delete") }
+                }) { Text(stringResource(R.string.action_delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { pendingDeleteId = null }) { Text("Cancel") }
+                TextButton(onClick = { pendingDeleteId = null }) { Text(stringResource(R.string.action_cancel)) }
             }
         )
     }

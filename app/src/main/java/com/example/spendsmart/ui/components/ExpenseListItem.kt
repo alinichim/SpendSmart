@@ -20,8 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.spendsmart.R
 import com.example.spendsmart.domain.model.Expense
 import com.example.spendsmart.ui.util.formatDate
 import com.example.spendsmart.ui.util.formatMoney
@@ -78,7 +80,7 @@ fun ExpenseListItem(
         IconButton(onClick = onDelete) {
             Icon(
                 imageVector = Icons.Outlined.DeleteOutline,
-                contentDescription = "Delete",
+                contentDescription = stringResource(R.string.cd_delete),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

@@ -21,7 +21,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.spendsmart.R
 import com.example.spendsmart.domain.model.ExpenseCategory
 import com.example.spendsmart.ui.util.formatMoneyPlain
 import kotlin.math.min
@@ -50,7 +52,7 @@ fun DonutChart(
             DonutCanvas(slices = slices)
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "Total",
+                    text = stringResource(R.string.donut_total),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -71,7 +73,7 @@ fun DonutChart(
             }
             if (slices.isEmpty()) {
                 Text(
-                    text = "Add an expense to see your breakdown.",
+                    text = stringResource(R.string.donut_empty),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

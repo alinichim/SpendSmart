@@ -1,3 +1,84 @@
 <resources>
     <string name="app_name">SpendSmart</string>
+
+    <!-- Common actions -->
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_ok">OK</string>
+    <string name="action_change">Change</string>
+    <string name="action_edit_expense">Edit expense</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_back">Back</string>
+    <string name="cd_delete">Delete</string>
+    <string name="cd_pick_currency">Pick currency</string>
+    <string name="cd_pick_date">Pick date</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_add">Add</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Shared -->
+    <!-- flag, code, display name -->
+    <string name="currency_label">"%1$s  %2$s — %3$s"</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_greeting">Hello User 👋</string>
+    <string name="dashboard_this_month">This month</string>
+    <string name="dashboard_no_rates_hint">Add ExchangeRate-API key in Settings to see converted total</string>
+    <string name="dashboard_spending_breakdown">Spending breakdown</string>
+    <string name="dashboard_recent_transactions">Recent transactions</string>
+    <string name="dashboard_no_expenses">No expenses recorded yet.</string>
+    <string name="dashboard_no_expenses_yet">No expenses yet</string>
+    <!-- emoji, category name -->
+    <string name="dashboard_top_category">Top: %1$s %2$s</string>
+    <!-- transaction count, top-category label -->
+    <string name="dashboard_transactions_summary">%1$d transactions · %2$s</string>
+
+    <!-- Delete confirmation -->
+    <string name="delete_expense_title">Delete expense?</string>
+    <string name="delete_expense_message">This action cannot be undone.</string>
+    <string name="delete_expense_message_details">This will permanently remove this expense.</string>
+
+    <!-- Donut chart -->
+    <string name="donut_total">Total</string>
+    <string name="donut_empty">Add an expense to see your breakdown.</string>
+
+    <!-- Add / Edit expense -->
+    <string name="add_expense_title">Add Expense</string>
+    <string name="edit_expense_title">Edit Expense</string>
+    <string name="field_amount">Amount</string>
+    <string name="field_category">Category</string>
+    <string name="field_date">Date</string>
+    <string name="field_notes">Notes (optional)</string>
+    <string name="field_change_date">Change date</string>
+    <!-- current length, max length -->
+    <string name="notes_char_counter">%1$d/%2$d</string>
+    <string name="error_invalid_amount">Enter a valid amount</string>
+    <string name="error_pick_category">Pick a category</string>
+    <string name="save_expense">Save expense</string>
+    <string name="save_changes">Save changes</string>
+    <string name="saved">Saved</string>
+
+    <!-- Expense details -->
+    <string name="expense_details_title">Expense</string>
+    <string name="expense_not_found">Expense not found.</string>
+    <string name="details_amount">Amount</string>
+    <string name="details_notes">Notes</string>
+    <!-- converted amount -->
+    <string name="details_converted_amount">≈ %1$s</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_transactions">Transactions</string>
+    <string name="settings_total_spent">Total spent</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_display_currency">Display currency</string>
+    <string name="settings_about">About</string>
+    <!-- app version -->
+    <string name="about_body">SpendSmart v%1$s — track your daily expenses, see breakdowns, and convert currencies on the go.</string>
 </resources>

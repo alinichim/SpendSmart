@@ -9,6 +9,7 @@ import com.example.spendsmart.domain.model.ExpenseCategory
 import com.example.spendsmart.domain.repository.PreferencesRepository
 import com.example.spendsmart.domain.usecase.GetExpenseByIdUseCase
 import com.example.spendsmart.domain.usecase.UpsertExpenseUseCase
+import com.example.spendsmart.R
 import com.example.spendsmart.domain.util.InputValidator
 import com.example.spendsmart.ui.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -92,8 +93,8 @@ class AddExpenseViewModel @Inject constructor(
         val current = _state.value
         val amount = InputValidator.sanitizeAmount(current.amount)
         val category = current.category
-        val amountError = if (amount == null) "Enter a valid amount" else null
-        val categoryError = if (category == null) "Pick a category" else null
+        val amountError = if (amount == null) R.string.error_invalid_amount else null
+        val categoryError = if (category == null) R.string.error_pick_category else null
         if (amountError != null || categoryError != null || amount == null || category == null) {
             _state.update {
                 it.copy(amountError = amountError, categoryError = categoryError)

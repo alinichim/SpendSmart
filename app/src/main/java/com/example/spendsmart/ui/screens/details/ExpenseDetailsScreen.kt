@@ -33,10 +33,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.spendsmart.R
 import com.example.spendsmart.ui.components.GradientHeader
 import com.example.spendsmart.ui.components.SectionCard
 import com.example.spendsmart.ui.util.formatDate
@@ -56,13 +58,13 @@ fun ExpenseDetailsScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
         GradientHeader(
-            title = "Expense",
+            title = stringResource(R.string.expense_details_title),
             onBack = onBack,
             trailing = {
                 IconButton(onClick = { showConfirm = true }) {
                     Icon(
                         Icons.Outlined.DeleteOutline,
-                        contentDescription = "Delete",
+                        contentDescription = stringResource(R.string.cd_delete),
                         tint = Color.White
                     )
                 }
@@ -80,7 +82,7 @@ fun ExpenseDetailsScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Expense not found.", style = MaterialTheme.typography.bodyMedium)
+                Text(stringResource(R.string.expense_not_found), style = MaterialTheme.typography.bodyMedium)
             }
 
             else -> {
@@ -123,7 +125,7 @@ fun ExpenseDetailsScreen(
                         }
                         Spacer(Modifier.height(16.dp))
                         Text(
-                            text = "Amount",
+                            text = stringResource(R.string.details_amount),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -136,7 +138,10 @@ fun ExpenseDetailsScreen(
                         val converted = state.convertedAmount
                         if (converted != null && expense.currency != state.displayCurrency) {
                             Text(
-                                text = "≈ ${formatMoney(converted, state.displayCurrency)}",
+                                text = stringResource(
+                                    R.string.details_converted_amount,
+                                    formatMoney(converted, state.displayCurrency)
+                                ),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -145,7 +150,7 @@ fun ExpenseDetailsScreen(
                     if (expense.notes.isNotBlank()) {
                         SectionCard {
                             Text(
-                                text = "Notes",
+                                text = stringResource(R.string.details_notes),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -164,7 +169,7 @@ fun ExpenseDetailsScreen(
                     ) {
                         Icon(Icons.Filled.Edit, contentDescription = null)
                         Spacer(Modifier.size(8.dp))
-                        Text("Edit expense")
+                        Text(stringResource(R.string.action_edit_expense))
                     }
                 }
             }
@@ -174,16 +179,16 @@ fun ExpenseDetailsScreen(
     if (showConfirm) {
         AlertDialog(
             onDismissRequest = { showConfirm = false },
-            title = { Text("Delete expense?") },
-            text = { Text("This will permanently remove this expense.") },
+            title = { Text(stringResource(R.string.delete_expense_title)) },
+            text = { Text(stringResource(R.string.delete_expense_message_details)) },
             confirmButton = {
                 TextButton(onClick = {
                     showConfirm = false
                     viewModel.onDelete(onDeleted)
-                }) { Text("Delete") }
+                }) { Text(stringResource(R.string.action_delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { showConfirm = false }) { Text("Cancel") }
+                TextButton(onClick = { showConfirm = false }) { Text(stringResource(R.string.action_cancel)) }
             }
         )
     }

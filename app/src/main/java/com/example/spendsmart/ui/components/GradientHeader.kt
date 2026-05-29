@@ -21,7 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.spendsmart.R
 import com.example.spendsmart.ui.theme.SpendSmartGradient
 
 @Composable
@@ -56,7 +58,7 @@ fun GradientHeader(
                     IconButton(onClick = onBack, modifier = Modifier.size(40.dp)) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = stringResource(R.string.cd_back),
                             tint = Color.White
                         )
                     }

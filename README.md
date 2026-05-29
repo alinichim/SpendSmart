@@ -292,27 +292,3 @@ Lint and full build:
 ./gradlew lintDebug
 ./gradlew assembleDebug
 ```
-
----
-
-## Requirements satisfied
-
-This project was scoped against an Android assignment with the following checklist.
-
-**Core requirements**
-
-- Kotlin only — no Java sources in `app/src/main`.
-- 100% Jetpack Compose UI (no `View`-based screens).
-- Multiple screens: Dashboard, Add Expense, Expense Details, Settings.
-- Jetpack Navigation Compose for transitions.
-- MVVM + Clean Architecture with explicit UI / Domain / Data separation.
-- Online API integration via Retrofit (ExchangeRate-API).
-
-**Bonus points**
-
-- **Database** — Room (SQLite abstraction) for local expense persistence.
-- **Input sanitization** — regex validation in `InputValidator` plus Room's parameterized queries.
-- **Encrypted communication** — HTTPS/TLS for all network traffic, `EncryptedSharedPreferences` for sensitive preferences including the API key.
-- **Settings screen** — theme toggle (System / Light / Dark) and display-currency picker, plus stats and an About card.
-- **Unit testing** — five suites (24 tests) covering validator, repositories, and ViewModels.
-- **Clean code** — Clean Architecture layering, Dagger Hilt for DI, single-responsibility ViewModels, immutable UI state, modular packaging by feature and layer.
